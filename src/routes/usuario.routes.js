@@ -28,9 +28,23 @@ const router = Router()
 
 router.get("/usuario", async (req, res) => {
   try {
-		res.json({ status: 'OK', data: await prisma.usuario.findMany() })
+    
+    const json = {
+      status: 'OK',
+      data: await prisma.usuario.findMany()
+    }
+
+		res.json( json )
   } catch (error) {
-    res.status(500).json({status: 'FAILED', data: { error }})
+
+    const json = {
+      status: 'FAILED',
+      data: {
+        error
+      }
+    }
+
+    res.status( 500 ).json( json )
   }
 })
 
