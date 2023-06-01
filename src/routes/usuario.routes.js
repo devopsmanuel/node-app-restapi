@@ -1,5 +1,5 @@
-import { Router } from "express"
-import { prisma } from "../db.js"
+import { Router } from 'express'
+import { prisma } from '../db.js'
 
 const router = Router()
 
@@ -26,7 +26,7 @@ const router = Router()
  *   
  */
 
-router.get("/usuario", async (req, res) => {
+router.get('/usuario', async (req, res) => {
   try {
     
     const json = {
@@ -76,7 +76,7 @@ router.get("/usuario", async (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/UsuarioResponseError'  
  */
-router.post("/usuario", async (req, res) => {
+router.post('/usuario', async (req, res) => {
 	try {
     const data = {
       data: req.body
@@ -132,7 +132,7 @@ router.post("/usuario", async (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/UsuarioResponseError'
  */
-router.get("/usuario/:id", async (req, res) => {
+router.get('/usuario/:id', async (req, res) => {
   try {
     const id = Number( req.params.id )
 
@@ -204,7 +204,7 @@ router.get("/usuario/:id", async (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/UsuarioResponseError'
  */
-router.delete("/usuario/:id", async (req, res) => {
+router.delete('/usuario/:id', async (req, res) => {
 
   const id = Number( req.params.id )
 
@@ -221,7 +221,7 @@ router.delete("/usuario/:id", async (req, res) => {
     res.json( json )
   } catch (error) {
 
-    if (error.meta.cause === "Record to delete does not exist.") {
+    if (error.meta.cause === 'Record to delete does not exist.') {
       
       const json = {
         status: 'FAILED',
@@ -279,7 +279,7 @@ router.delete("/usuario/:id", async (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/UsuarioResponseError'
  */
-router.patch("/usuario/:id", async (req, res) => {
+router.patch('/usuario/:id', async (req, res) => {
 
   const id = Number( req.params.id )
 
@@ -301,7 +301,7 @@ router.patch("/usuario/:id", async (req, res) => {
     res.json( json )
 	} catch (error) {
 
-    if (error.meta.cause === "Record to update not found.") {
+    if (error.meta.cause === 'Record to update not found.') {
       
       const json = {
         status: 'FAILED',
