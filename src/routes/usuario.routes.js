@@ -22,7 +22,7 @@ const router = Router()
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UsuarioResponseError'
+ *               $ref: '#/components/schemas/ResponseError'
  *   
  */
 
@@ -74,7 +74,7 @@ router.get('/usuario', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UsuarioResponseError'  
+ *               $ref: '#/components/schemas/ResponseError'  
  */
 router.post('/usuario', async (req, res) => {
 	try {
@@ -130,7 +130,7 @@ router.post('/usuario', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UsuarioResponseError'
+ *               $ref: '#/components/schemas/ResponseError'
  */
 router.get('/usuario/:id', async (req, res) => {
   try {
@@ -202,7 +202,7 @@ router.get('/usuario/:id', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UsuarioResponseError'
+ *               $ref: '#/components/schemas/ResponseError'
  */
 router.delete('/usuario/:id', async (req, res) => {
 
@@ -277,7 +277,7 @@ router.delete('/usuario/:id', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UsuarioResponseError'
+ *               $ref: '#/components/schemas/ResponseError'
  */
 router.patch('/usuario/:id', async (req, res) => {
 
@@ -341,7 +341,7 @@ router.patch('/usuario/:id', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/UsuarioResponseError'
+ *               $ref: '#/components/schemas/ResponseError'
  * 
  */
 router.get('/usuario/email/:email', async (req, res) => {
@@ -398,29 +398,7 @@ router.get('/usuario/email/:email', async (req, res) => {
  *         name:
  *           type: string
  * 
- *     UsuarioResponseOK: 
- *       type: object
- *       properties:
- *         status:
- *           type: string
- *           example: OK
- *         data:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               id: 
- *                 type: number
- *               email:
- *                 type: string
- *               name:
- *                 type: string
- *             example:
- *               id: 1
- *               email: usuario@mail.com
- *               name: nombre usuario
- *       
- *     UsuarioResponseError:
+ *     ResponseError:
  *       type: object
  *       properties:
  *         status:
@@ -431,7 +409,33 @@ router.get('/usuario/email/:email', async (req, res) => {
  *           properties:
  *             error:
  *               type: string
- *               example: Error Interno...       
+ *               example: Error Interno... 
+ * 
+ *     Usuario:
+ *       type: object
+ *       properties:
+ *         id: 
+ *           type: number
+ *         email:
+ *           type: string
+ *         name:
+ *           type: string
+ *       example:
+ *         id: 1
+ *         email: usuario@mail.com
+ *         name: nombre usuario
+ * 
+ *     UsuarioResponseOK: 
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: string
+ *           example: OK
+ *         data:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Usuario'
+ *             
  * 
  */
 
