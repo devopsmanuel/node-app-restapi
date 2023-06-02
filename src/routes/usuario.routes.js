@@ -324,6 +324,70 @@ router.patch('/usuario/:id', async (req, res) => {
 
 /**
  * @openapi
+ * /api/v1/usuario/email/{email}:
+ *   get:
+ *     summary: Listar Usuario por email
+ *     tags:
+ *       - Usuario
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UsuarioResponseOK'
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UsuarioResponseError'
+ * 
+ */
+router.get('/usuario/email/:email', async (req, res) => {
+
+  const email = req.params.email
+
+  try {
+    const query = {
+      where: {
+        email
+      }
+    }
+    const usuario = await prisma.usuario.findUnique( query )
+
+    if (usuario === null) {
+      
+      const json = {
+        status: 'FAILED',
+        data: {
+          error: `Usuario con id: ${id} no encontrado`
+        }
+      }
+
+      return res.status( 400 ).json( json )
+    }
+
+    const json = {
+      status: 'OK',
+      data: usuario
+    }
+
+    res.json( json )
+
+  } catch (error) {
+    
+    const json = {
+      status: 'FAILED',
+      data: { error }
+    }
+
+    res.status( 500 ).json( json )
+  }
+})
+
+/**
+ * @openapi
  * components:
  *   schemas:
  *     UsuarioRequest:
@@ -369,6 +433,6 @@ router.patch('/usuario/:id', async (req, res) => {
  *               type: string
  *               example: Error Interno...       
  * 
- */ 
+ */
 
 export default router
